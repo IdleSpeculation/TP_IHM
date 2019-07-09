@@ -7,11 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class View1 implements ChangedValueListener {
 	
-    private Label label;
     private Button bouton;
     private Scene scene;
     private TextField textField;
@@ -20,14 +21,13 @@ public class View1 implements ChangedValueListener {
         Group root = new Group();
         primaryStage.setTitle("Illustration du modele MVC ");
         primaryStage.setMinWidth(400);
-        primaryStage.setMinHeight(300);
+        primaryStage.setMinHeight(150);
         scene=new Scene(root);
 
-//ajouter un text field
         textField = new TextField();
-        textField.setLayoutX(140);
-        textField.setLayoutY(70);
-        // force the field to be numeric only
+        textField.setText("0");
+
+
         textField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
@@ -36,18 +36,17 @@ public class View1 implements ChangedValueListener {
                     textField.setText(newValue.replaceAll("[^\\d]", ""));
                 }
             }
+        
         });
-//ajouter un label
-        label=new Label("?");
-        label.setLayoutX(175);
-        label.setLayoutY(40);
-//ajouter un bouton
+             
+
         bouton = new Button("Valider");
-        bouton.setLayoutX(140);
-        bouton.setLayoutY(100);
-        root.getChildren().add(textField);
-        root.getChildren().add(bouton);
-        root.getChildren().add(label);
+        HBox hbox = new HBox(textField, bouton);
+        VBox vbox = new VBox( hbox);
+        vbox.setLayoutX(95);
+        vbox.setLayoutY(40);
+
+        root.getChildren().add(vbox);
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -58,12 +57,10 @@ public class View1 implements ChangedValueListener {
     public TextField getTextField(){
         return textField;
     }
-    public void setText(String text){label.setText(text);}
 
     @Override
     public void volumeChanged(ChangedValueEvent event) {
         String value = Integer.toString(event.getNewValue());
-        label.setText(value);
         textField.setText(value);
     }
 }

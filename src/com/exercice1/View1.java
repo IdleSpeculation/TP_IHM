@@ -8,10 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class View1 {
-    private Label label;
     private Button bouton;
     private Scene scene;
     private TextField textField;
@@ -19,12 +20,12 @@ public class View1 {
         Group root = new Group();
         primaryStage.setTitle("Illustration du modele MVC ");
         primaryStage.setMinWidth(400);
-        primaryStage.setMinHeight(300);
+        primaryStage.setMinHeight(150);
         scene=new Scene(root);
 
         textField = new TextField();
-        textField.setLayoutX(140);
-        textField.setLayoutY(70);
+        textField.setText("0");
+
 
         textField.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -35,15 +36,14 @@ public class View1 {
                 }
             }
         });
-        label=new Label("?");
-        label.setLayoutX(175);
-        label.setLayoutY(40);
+
         bouton = new Button("Valider");
-        bouton.setLayoutX(140);
-        bouton.setLayoutY(100);
-        root.getChildren().add(textField);
-        root.getChildren().add(bouton);
-        root.getChildren().add(label);
+        HBox hbox = new HBox(textField, bouton);
+        VBox vbox = new VBox( hbox);
+        vbox.setLayoutX(95);
+        vbox.setLayoutY(40);
+
+        root.getChildren().add(vbox);
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -55,6 +55,7 @@ public class View1 {
         return textField;
     }
     public void setText(String text){
-    	label.setText(text);
+    	textField.setText(text);
     }
+
 }

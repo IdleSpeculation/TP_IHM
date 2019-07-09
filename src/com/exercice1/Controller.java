@@ -16,9 +16,7 @@ public class Controller {
     }
 
     public void control() {
-        SpinnerValueFactory SVF  = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000000);
-        SVF.setWrapAround(true);
-        view2.getSpinner().setValueFactory(SVF);
+
         view1.getButton().setOnAction(e -> traitClicMethod(1));
         view2.getButton().setOnAction(e -> traitClicMethod(2));
     }
@@ -30,8 +28,8 @@ public class Controller {
     	else 
     		value =  (Integer) view2.getSpinner().getValue();
         model.setValue(value);
-        view1.setText(Integer.toString(value));
-        view2.setText(Integer.toString(value));
-        view2.getSpinner().getValueFactory().setValue(value);
+//        view1.setText(Integer.toString(value));
+ //       view2.setValue(value);
+        
     }
 }
